@@ -1,0 +1,65 @@
+
+// #SOLUTION 1.-
+
+function addSteps(num1, num2) {
+    // Convert numbers to strings and reverse them to easily access digits
+    let num1Str = num1.toString().split("").reverse().join("");
+    let num2Str = num2.toString().split("").reverse().join("");
+
+    let carry = 0
+    let temp= 0 ;
+    let steps = {};
+
+    // Iterate through each digit in both numbers and add them
+    let sumString ='';
+    for (let i = 0; i < Math.max(num1Str.length, num2Str.length); i++){
+      // Get the digit at the current position for both numbers, or 0 if it doesn't exist
+      let digit1 = parseInt(num1Str[i]) || 0;
+      let digit2 = parseInt(num2Str[i]) || 0;
+
+      // Add the digits and the carry from the previous step
+      let sum = digit1 + digit2 + carry
+
+      // Calculate the new carry and sum digits for the current step
+      carry = Math.floor(sum / 10)
+      let sumDigit = sum % 10;
+      temp = temp + carry
+      //  tempcarry = carry.toString+tempcarry
+       sumString = sumDigit.toString() +  sumString
+      // Create an object for the current step and add it to the steps object
+      steps["step" + (i+1)] = {
+        "carryString": "1".repeat(temp),
+        "sumString": sumString
+      };
+    }
+
+    return steps;
+  }
+
+  let num1 = 1489;
+  let num2 = 714;
+  let steps = addSteps(num1, num2);
+  console.log(steps);
+
+
+
+
+// #SOLUTION 2.-
+
+let count = 0; // counter to keep track of valid numbers
+
+for (let i = 10; i < 100; i++) {  // iterate through all two-digit numbers
+  const digits = String(i).split('').map(Number); // convert number to an array of digits
+  if (digits[0] < digits[1]) {  // check if left digit is smaller than right digit
+    count++;
+  }
+}
+
+for (let i = 100; i < 1000; i++) {  // iterate through all three-digit numbers
+  const digits = String(i).split('').map(Number); // convert number to an array of digits
+  if (digits[0] < digits[1] && digits[1] < digits[2]) {  // check if digits are in increasing order
+    count++;
+  }
+}
+
+console.log("Total valid numbers:", count);
