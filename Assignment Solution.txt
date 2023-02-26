@@ -1,6 +1,29 @@
 
 // #SOLUTION 1.-
 
+let count = 0; // counter to keep track of valid numbers
+
+for (let i = 10; i < 100; i++) {  // iterate through all two-digit numbers
+  const digits = String(i).split('').map(Number); // convert number to an array of digits
+  if (digits[0] < digits[1]) {  // check if left digit is smaller than right digit
+    count++;
+  }
+}
+
+for (let i = 100; i < 1000; i++) {  // iterate through all three-digit numbers
+  const digits = String(i).split('').map(Number); // convert number to an array of digits
+  if (digits[0] < digits[1] && digits[1] < digits[2]) {  // check if digits are in increasing order
+    count++;
+  }
+}
+
+console.log("Total valid numbers:", count);
+
+
+
+
+// #SOLUTION 2.-
+
 function addSteps(num1, num2) {
     // Convert numbers to strings and reverse them to easily access digits
     let num1Str = num1.toString().split("").reverse().join("");
@@ -40,26 +63,3 @@ function addSteps(num1, num2) {
   let num2 = 714;
   let steps = addSteps(num1, num2);
   console.log(steps);
-
-
-
-
-// #SOLUTION 2.-
-
-let count = 0; // counter to keep track of valid numbers
-
-for (let i = 10; i < 100; i++) {  // iterate through all two-digit numbers
-  const digits = String(i).split('').map(Number); // convert number to an array of digits
-  if (digits[0] < digits[1]) {  // check if left digit is smaller than right digit
-    count++;
-  }
-}
-
-for (let i = 100; i < 1000; i++) {  // iterate through all three-digit numbers
-  const digits = String(i).split('').map(Number); // convert number to an array of digits
-  if (digits[0] < digits[1] && digits[1] < digits[2]) {  // check if digits are in increasing order
-    count++;
-  }
-}
-
-console.log("Total valid numbers:", count);
